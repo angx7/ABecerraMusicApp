@@ -48,7 +48,8 @@ class MainActivity : ComponentActivity() {
                             val args = entry.toRoute<AlbumDetailScreenRoute>()
                             AlbumDetailScreen(
                                 id = args.id,
-                                onBack = { navController.popBackStack() }
+                                onBack = { navController.popBackStack() },
+                                paddingValues = innerPadding
                             )
                         }
                     }

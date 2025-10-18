@@ -14,6 +14,7 @@ val DarkBlue = Color(0xFF0F1B3D)
 val LightBlue = Color(0xFF1E2E61)
 val BrilliantBlue = Color(0xFF3B4CA8)
 val AccentBlue = Color(0xFF5D9CEC)
-val SoftWhite = Color(0xFFF5F6FA)
+val SurfaceLavender = Color(0xFFF3F0FF)
+
 val TextWhite = Color(0xFFFDFEFF)
 val CardGray = Color(0xFF18244C)
