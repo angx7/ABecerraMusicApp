@@ -52,7 +52,7 @@ fun ABecerraMusicAppTheme(
 
     MaterialTheme(
         colorScheme = colorScheme,
-        typography = Typography,
+        typography = MerriweatherTypography,
         content = content
     )
 }
