@@ -33,7 +33,7 @@ class MainActivity : ComponentActivity() {
 
                     NavHost(
                         navController = navController,
-                        startDestination = HomeScreenRoute // puedes mantener el nombre de ruta
+                        startDestination = HomeScreenRoute
                     ) {
                         // Lista de álbumes
                         composable<HomeScreenRoute> {
