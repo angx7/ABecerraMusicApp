@@ -12,10 +12,10 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import androidx.navigation.toRoute
-import com.example.abecerramusicapp.navigation.AlbumDetailScreenRoute
-import com.example.abecerramusicapp.navigation.HomeScreenRoute
 import com.example.abecerramusicapp.screens.AlbumDetailScreen
+import com.example.abecerramusicapp.screens.AlbumDetailScreenRoute
 import com.example.abecerramusicapp.screens.AlbumListScreen
+import com.example.abecerramusicapp.screens.HomeScreenRoute
 import com.example.abecerramusicapp.ui.theme.ABecerraMusicAppTheme
 
 class MainActivity : ComponentActivity() {
@@ -31,22 +31,19 @@ class MainActivity : ComponentActivity() {
                     containerColor = MaterialTheme.colorScheme.background
                 ) { innerPadding ->
 
-                    // Host de navegación con rutas tipadas
                     NavHost(
                         navController = navController,
-                        startDestination = HomeScreenRoute
+                        startDestination = HomeScreenRoute // puedes mantener el nombre de ruta
                     ) {
-                        // Pantalla principal: lista de álbumes
+                        // Lista de álbumes
                         composable<HomeScreenRoute> {
                             AlbumListScreen(
                                 paddingValues = innerPadding,
-                                onAlbumClick = { id ->
-                                    navController.navigate(AlbumDetailScreenRoute(id))
-                                }
+                                navController = navController
                             )
                         }
 
-                        // Pantalla de detalle
+                        // Detalle
                         composable<AlbumDetailScreenRoute> { entry ->
                             val args = entry.toRoute<AlbumDetailScreenRoute>()
                             AlbumDetailScreen(

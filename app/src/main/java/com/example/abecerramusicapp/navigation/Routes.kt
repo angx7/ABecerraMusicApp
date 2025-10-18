@@ -1,4 +1,5 @@
-package com.example.abecerramusicapp.navigation
+package com.example.abecerramusicapp.screens
+
 import kotlinx.serialization.Serializable
 
 @Serializable

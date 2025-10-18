@@ -17,16 +17,18 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.viewmodel.compose.viewModel
+import androidx.navigation.NavController
 import coil3.compose.rememberAsyncImagePainter
 import com.example.abecerramusicapp.data.Album
+import com.example.abecerramusicapp.screens.AlbumDetailScreenRoute
 import com.example.abecerramusicapp.viewmodel.AlbumListUIState
 import com.example.abecerramusicapp.viewmodel.AlbumListViewModel
 
 @Composable
 fun AlbumListScreen(
-    vm: AlbumListViewModel = viewModel(),
     paddingValues: PaddingValues,
-    onAlbumClick: (String) -> Unit
+    navController: NavController,
+    vm: AlbumListViewModel = viewModel()
 ) {
     LaunchedEffect(Unit) { vm.load() }
 
@@ -38,7 +40,8 @@ fun AlbumListScreen(
         modifier = Modifier
             .fillMaxSize()
             .background(gradient)
-            .padding(12.dp)
+            .padding(horizontal = 12.dp) // padding lateral fijo
+            .padding(paddingValues)      // respeta insets del Scaffold
     ) {
         when (val state = vm.uiState) {
             is AlbumListUIState.Loading -> Box(Modifier.fillMaxSize(), contentAlignment = Alignment.Center) {
@@ -47,17 +50,19 @@ fun AlbumListScreen(
             is AlbumListUIState.Error -> Box(Modifier.fillMaxSize(), contentAlignment = Alignment.Center) {
                 Text("Error: ${state.message}", color = Color.White, fontWeight = FontWeight.SemiBold)
             }
-            is AlbumListUIState.Success -> LazyColumn(
-                verticalArrangement = Arrangement.spacedBy(12.dp)
-            ) {
-                items(state.albums) { album ->
-                    AlbumCard(album, onClick = { onAlbumClick(album.id) } )
+            is AlbumListUIState.Success -> {
+                LazyColumn(
+                    verticalArrangement = Arrangement.spacedBy(12.dp),
+                    modifier = Modifier.fillMaxSize()
+                ) {
+                    items(state.albums) { album ->
+                        AlbumCard(
+                            album = album,
+                            onClick = { navController.navigate(AlbumDetailScreenRoute(album.id)) }
+                        )
+                    }
                 }
             }
-
-            is AlbumListUIState.Error -> TODO()
-            AlbumListUIState.Loading -> TODO()
-            is AlbumListUIState.Success -> TODO()
         }
     }
 }
