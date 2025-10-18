@@ -26,6 +26,11 @@ import androidx.compose.ui.unit.dp
 import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavController
 import coil3.compose.rememberAsyncImagePainter
+import com.example.abecerramusicapp.components.AlbumHeroCard
+import com.example.abecerramusicapp.components.BottomMiniPlayer
+import com.example.abecerramusicapp.components.GreetingCard
+import com.example.abecerramusicapp.components.RecentlyPlayedItem
+import com.example.abecerramusicapp.components.SectionHeader
 import com.example.abecerramusicapp.data.Album
 import com.example.abecerramusicapp.viewmodel.AlbumListUIState
 import com.example.abecerramusicapp.viewmodel.AlbumListViewModel
@@ -106,162 +111,44 @@ fun AlbumListScreen(
     }
 }
 
-// ----- COMPONENTES -----
 
-@Composable
-private fun GreetingCard(title: String, userName: String) {
-    ElevatedCard(
-        modifier = Modifier.fillMaxWidth(),
-        shape = MaterialTheme.shapes.extraLarge,
-        colors = CardDefaults.elevatedCardColors(containerColor = CardGray)
-    ) {
-        Box(
-            modifier = Modifier
-                .background(Brush.linearGradient(listOf(AccentBlue, LightBlue)))
-                .padding(20.dp)
-        ) {
-            Column {
-                Row(Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.SpaceBetween) {
-                    Icon(Icons.Default.Menu, contentDescription = null, tint = TextWhite)
-                    Icon(Icons.Default.Search, contentDescription = null, tint = TextWhite)
-                }
-                Spacer(Modifier.height(16.dp))
-                Text(title, color = TextWhite.copy(alpha = 0.8f), style = MaterialTheme.typography.bodyLarge)
-                Text(
-                    userName,
-                    color = TextWhite,
-                    style = MaterialTheme.typography.headlineMedium.copy(fontWeight = FontWeight.ExtraBold)
-                )
-            }
-        }
-    }
-}
 
-@Composable
-private fun SectionHeader(title: String) {
-    Row(
-        Modifier.fillMaxWidth(),
-        horizontalArrangement = Arrangement.SpaceBetween,
-        verticalAlignment = Alignment.CenterVertically
-    ) {
-        Text(
-            title,
-            style = MaterialTheme.typography.titleLarge.copy(fontWeight = FontWeight.ExtraBold),
-            color = TextWhite
-        )
-        TextButton(onClick = { }) {
-            Text("See more", color = AccentBlue)
-        }
-    }
-}
 
-@Composable
-private fun AlbumHeroCard(album: Album, onClick: () -> Unit, width: Dp = 220.dp, height: Dp = 160.dp) {
-    ElevatedCard(
-        onClick = onClick,
-        shape = MaterialTheme.shapes.extraLarge,
-        modifier = Modifier
-            .width(width)
-            .height(height)
-            .shadow(8.dp, shape = MaterialTheme.shapes.extraLarge)
-    ) {
-        Box {
-            Image(
-                painter = rememberAsyncImagePainter(album.image),
-                contentDescription = album.title,
-                modifier = Modifier.fillMaxSize(),
-                contentScale = ContentScale.Crop
-            )
-            Box(
-                Modifier
-                    .align(Alignment.BottomStart)
-                    .fillMaxWidth()
-                    .background(Color(0xAA000000))
-                    .padding(12.dp)
-            ) {
-                Row(verticalAlignment = Alignment.CenterVertically) {
-                    Column(Modifier.weight(1f)) {
-                        Text(album.title, color = TextWhite, fontWeight = FontWeight.Bold)
-                        Text(album.artist, color = TextWhite.copy(alpha = 0.8f))
-                    }
-                    Spacer(Modifier.width(8.dp))
-                    ElevatedButton(
-                        onClick = onClick,
-                        shape = MaterialTheme.shapes.large,
-                        contentPadding = PaddingValues(6.dp),
-                        colors = ButtonDefaults.elevatedButtonColors(containerColor = AccentBlue)
-                    ) {
-                        Icon(Icons.Default.PlayArrow, contentDescription = "Play", tint = TextWhite)
-                    }
-                }
-            }
-        }
-    }
-}
 
-@Composable
-private fun RecentlyPlayedItem(album: Album, onClick: () -> Unit) {
-    ElevatedCard(
-        onClick = onClick,
-        shape = MaterialTheme.shapes.large,
-        colors = CardDefaults.elevatedCardColors(containerColor = CardGray),
-        modifier = Modifier.fillMaxWidth()
-    ) {
-        Row(
-            Modifier.padding(14.dp),
-            verticalAlignment = Alignment.CenterVertically
-        ) {
-            Image(
-                painter = rememberAsyncImagePainter(album.image),
-                contentDescription = album.title,
-                modifier = Modifier
-                    .size(48.dp)
-                    .clip(MaterialTheme.shapes.medium),
-                contentScale = ContentScale.Crop
-            )
-            Spacer(Modifier.width(12.dp))
-            Column(Modifier.weight(1f)) {
-                Text(album.title, color = TextWhite, fontWeight = FontWeight.Bold)
-                Text("${album.artist} • Popular Song", color = TextWhite.copy(alpha = 0.8f))
-            }
-            IconButton(onClick = { }) {
-                Icon(Icons.Default.MoreVert, contentDescription = "more", tint = TextWhite)
-            }
-        }
-    }
-}
 
-@Composable
-private fun BottomMiniPlayer(album: Album, onPlay: () -> Unit, modifier: Modifier = Modifier) {
-    ElevatedCard(
-        modifier = modifier
-            .fillMaxWidth()
-            .height(72.dp),
-        shape = MaterialTheme.shapes.extraLarge,
-        colors = CardDefaults.elevatedCardColors(containerColor = LightBlue)
-    ) {
-        Row(
-            Modifier
-                .fillMaxSize()
-                .padding(horizontal = 16.dp),
-            verticalAlignment = Alignment.CenterVertically
-        ) {
-            Image(
-                painter = rememberAsyncImagePainter(album.image),
-                contentDescription = album.title,
-                modifier = Modifier
-                    .size(44.dp)
-                    .clip(MaterialTheme.shapes.medium),
-                contentScale = ContentScale.Crop
-            )
-            Spacer(Modifier.width(12.dp))
-            Column(Modifier.weight(1f)) {
-                Text(album.title, color = TextWhite, fontWeight = FontWeight.Bold)
-                Text(album.artist, color = TextWhite.copy(alpha = 0.8f))
-            }
-            IconButton(onClick = onPlay) {
-                Icon(Icons.Default.PlayArrow, contentDescription = "play", tint = AccentBlue)
-            }
-        }
-    }
-}
+
+
+//@Composable
+//private fun BottomMiniPlayer(album: Album, onPlay: () -> Unit, modifier: Modifier = Modifier) {
+//    ElevatedCard(
+//        modifier = modifier
+//            .fillMaxWidth()
+//            .height(72.dp),
+//        shape = MaterialTheme.shapes.extraLarge,
+//        colors = CardDefaults.elevatedCardColors(containerColor = LightBlue)
+//    ) {
+//        Row(
+//            Modifier
+//                .fillMaxSize()
+//                .padding(horizontal = 16.dp),
+//            verticalAlignment = Alignment.CenterVertically
+//        ) {
+//            Image(
+//                painter = rememberAsyncImagePainter(album.image),
+//                contentDescription = album.title,
+//                modifier = Modifier
+//                    .size(44.dp)
+//                    .clip(MaterialTheme.shapes.medium),
+//                contentScale = ContentScale.Crop
+//            )
+//            Spacer(Modifier.width(12.dp))
+//            Column(Modifier.weight(1f)) {
+//                Text(album.title, color = TextWhite, fontWeight = FontWeight.Bold)
+//                Text(album.artist, color = TextWhite.copy(alpha = 0.8f))
+//            }
+//            IconButton(onClick = onPlay) {
+//                Icon(Icons.Default.PlayArrow, contentDescription = "play", tint = AccentBlue)
+//            }
+//        }
+//    }
+//}
