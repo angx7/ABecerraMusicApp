@@ -38,18 +38,15 @@ fun DetailContent(
             .fillMaxSize()
             .padding(horizontal = 16.dp, vertical = 12.dp)
     ) {
-        // Header con imagen y overlay
         item {
             HeaderHero(
                 album = album,
                 onBack = onBack,
-                onPlay = { /* TODO reproducir */ },
-                onShuffle = { /* TODO shuffle */ },
-                onFavorite = { /* TODO fav */ }
+                onPlay = {  },
+                onShuffle = {  },
+                onFavorite = {  }
             )
         }
-
-        // About this album
         item {
             ElevatedCard(
                 shape = MaterialTheme.shapes.extraLarge,
@@ -71,10 +68,9 @@ fun DetailContent(
             }
         }
 
-        // Chip de artista
         item {
             AssistChip(
-                onClick = { /* navegación a artista? */ },
+                onClick = {  },
                 label = {
                     Row(verticalAlignment = Alignment.CenterVertically) {
                         Text("Artist:", fontWeight = FontWeight.ExtraBold)
@@ -104,7 +100,7 @@ fun DetailContent(
     Box(Modifier.fillMaxSize()) {
         BottomMiniPlayer(
             album = album,
-            onPlay = { /* TODO play */ },
+            onPlay = {  },
             modifier = Modifier
                 .align(Alignment.BottomCenter)
                 .padding(16.dp)

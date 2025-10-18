@@ -64,7 +64,6 @@ fun HeaderHero(
                     }
                 }
             )
-            // Overlay degradado para legibilidad
             Box(
                 Modifier
                     .matchParentSize()
@@ -74,8 +73,6 @@ fun HeaderHero(
                         )
                     )
             )
-
-            // Botón back
             FilledIconButton(
                 onClick = onBack,
                 modifier = Modifier
@@ -85,8 +82,6 @@ fun HeaderHero(
             ) {
                 Icon(Icons.Default.ArrowBack, contentDescription = "Back", tint = TextWhite)
             }
-
-            // Botón favorito
             FilledIconButton(
                 onClick = onFavorite,
                 modifier = Modifier
@@ -98,7 +93,6 @@ fun HeaderHero(
                 Icon(Icons.Default.FavoriteBorder, contentDescription = "Fav", tint = TextWhite)
             }
 
-            // Título + botones play/shuffle
             Column(
                 Modifier
                     .align(Alignment.BottomStart)
