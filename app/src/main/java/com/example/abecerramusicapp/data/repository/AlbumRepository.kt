@@ -8,4 +8,5 @@ class AlbumRepository(
     private val api: MusicService = RetrofitInstance.retrofit.create(MusicService::class.java)
 ){
     suspend fun fetchAlbums(): Result<List<Album>> = runCatching { api.getAlbums() }
+    suspend fun fetchAlbum(id: String): Result<Album> = runCatching { api.getAlbums(id) }
 }

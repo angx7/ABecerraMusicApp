@@ -25,7 +25,8 @@ import com.example.abecerramusicapp.viewmodel.AlbumListViewModel
 @Composable
 fun AlbumListScreen(
     vm: AlbumListViewModel = viewModel(),
-    paddingValues: PaddingValues
+    paddingValues: PaddingValues,
+    onAlbumClick: (String) -> Unit
 ) {
     LaunchedEffect(Unit) { vm.load() }
 
@@ -50,7 +51,7 @@ fun AlbumListScreen(
                 verticalArrangement = Arrangement.spacedBy(12.dp)
             ) {
                 items(state.albums) { album ->
-                    AlbumCard(album)
+                    AlbumCard(album, onClick = { onAlbumClick(album.id) } )
                 }
             }
 
@@ -62,12 +63,13 @@ fun AlbumListScreen(
 }
 
 @Composable
-private fun AlbumCard(album: Album) {
+private fun AlbumCard(album: Album, onClick: () -> Unit) {
     ElevatedCard(
         modifier = Modifier
             .fillMaxWidth()
             .shadow(elevation = 8.dp, shape = MaterialTheme.shapes.large),
-        shape = MaterialTheme.shapes.large
+        shape = MaterialTheme.shapes.large,
+        onClick = onClick
     ) {
         Row(Modifier.background(Color.White)) {
             Image(
